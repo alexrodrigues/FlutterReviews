@@ -22,4 +22,19 @@ class ReviewsProvider with ChangeNotifier {
       },
     );
   }
+
+  Future<List<Review>> getIosReviews() {
+    return http.get(Uri.parse(_BASE_URL + "reviews/ios")).then(
+      (value) {
+        List<dynamic> list = jsonDecode(value.body);
+        List<Review> response = [];
+        list.forEach((element) {
+          response.add(Review(element["userName"], element["review"], ""));
+        });
+        notifyListeners();
+
+        return response;
+      },
+    );
+  }
 }
