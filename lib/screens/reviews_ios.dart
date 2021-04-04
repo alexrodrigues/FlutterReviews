@@ -10,22 +10,24 @@ class ReviewsIos extends StatefulWidget {
   _ReviewsIosState createState() => _ReviewsIosState();
 }
 
-class _ReviewsIosState extends State<ReviewsIos> {
+class _ReviewsIosState extends State<ReviewsIos>
+    with AutomaticKeepAliveClientMixin<ReviewsIos> {
   bool _isLoading = true;
   List<Review> _reviews = [];
 
   void _fetchData() {
-    _showLoading(true);
-    Provider.of<ReviewsProvider>(context, listen: false)
-        .getIosReviews()
-        .then((value) {
-      _reviews = value;
-      _showLoading(false);
-    }).catchError((e) {
-      Alert(message: 'Error: ${e.toString()}').show();
-      _showLoading(false);
-    });
-    ;
+    if (_reviews.isEmpty) {
+      _showLoading(true);
+      Provider.of<ReviewsProvider>(context, listen: false)
+          .getIosReviews()
+          .then((value) {
+        _reviews = value;
+        _showLoading(false);
+      }).catchError((e) {
+        Alert(message: 'Error: ${e.toString()}').show();
+        _showLoading(false);
+      });
+    }
   }
 
   void _showLoading(bool isLoading) {
@@ -36,8 +38,8 @@ class _ReviewsIosState extends State<ReviewsIos> {
 
   @override
   void initState() {
-    super.initState();
     _fetchData();
+    super.initState();
   }
 
   @override
@@ -51,4 +53,7 @@ class _ReviewsIosState extends State<ReviewsIos> {
           )
         : ReviewList(_reviews);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

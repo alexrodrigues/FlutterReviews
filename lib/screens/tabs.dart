@@ -8,7 +8,8 @@ class HomeTabs extends StatefulWidget {
 }
 
 class _HomeTabsState extends State<HomeTabs> {
-  static const ROUTE_NAME = "HomeTabs";
+  static const _ANDROID_TAB = "_ANDROID_TAB";
+  static const _IOS_TAB = "_IOS_TAB";
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,12 @@ class _HomeTabsState extends State<HomeTabs> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.dark,
           title: Text(
             "Reviews",
           ),
           bottom: TabBar(
+            isScrollable: true,
             tabs: [
               Tab(
                 text: 'Android',
@@ -32,8 +35,14 @@ class _HomeTabsState extends State<HomeTabs> {
         ),
         body: TabBarView(
           children: [
-            ReviewsAndroid(),
-            ReviewsIos(),
+            Container(
+              key: ValueKey(_ANDROID_TAB),
+              child: ReviewsAndroid(),
+            ),
+            Container(
+              key: ValueKey(_IOS_TAB),
+              child: ReviewsIos(),
+            ),
           ],
         ),
       ),

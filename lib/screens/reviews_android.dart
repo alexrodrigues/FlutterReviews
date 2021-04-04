@@ -10,22 +10,24 @@ class ReviewsAndroid extends StatefulWidget {
   _ReviewsAndroidState createState() => _ReviewsAndroidState();
 }
 
-class _ReviewsAndroidState extends State<ReviewsAndroid> {
+class _ReviewsAndroidState extends State<ReviewsAndroid>
+    with AutomaticKeepAliveClientMixin<ReviewsAndroid> {
   bool _isLoading = true;
   List<Review> _reviews = [];
 
   void _fetchData() {
-    _showLoading(true);
-    Provider.of<ReviewsProvider>(context, listen: false)
-        .getAndroidReviews()
-        .then((value) {
-      _reviews = value;
-      _showLoading(false);
-    }).catchError((e) {
-      Alert(message: 'Error: ${e.toString()}').show();
-      _showLoading(false);
-    });
-    ;
+    if (_reviews.isEmpty) {
+      _showLoading(true);
+      Provider.of<ReviewsProvider>(context, listen: false)
+          .getAndroidReviews()
+          .then((value) {
+        _reviews = value;
+        _showLoading(false);
+      }).catchError((e) {
+        Alert(message: 'Error: ${e.toString()}').show();
+        _showLoading(false);
+      });
+    }
   }
 
   void _showLoading(bool isLoading) {
@@ -36,8 +38,8 @@ class _ReviewsAndroidState extends State<ReviewsAndroid> {
 
   @override
   void initState() {
-    super.initState();
     _fetchData();
+    super.initState();
   }
 
   @override
@@ -51,4 +53,7 @@ class _ReviewsAndroidState extends State<ReviewsAndroid> {
           )
         : ReviewList(_reviews);
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
