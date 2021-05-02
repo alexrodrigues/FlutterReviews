@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:alert/alert.dart';
 import 'package:poc_review_store/model/review.dart';
+import 'package:poc_review_store/model/review_type.dart';
 import 'package:poc_review_store/providers/reviews_provider.dart';
 import 'package:poc_review_store/widget/review_list.dart';
 import 'package:provider/provider.dart';
 
-class ReviewsAndroid extends StatefulWidget {
+class ReviewsScreen extends StatefulWidget {
+  final ReviewPlataform plataform;
+
+  ReviewsScreen(this.plataform);
+
   @override
-  _ReviewsAndroidState createState() => _ReviewsAndroidState();
+  _ReviewsScreenState createState() => _ReviewsScreenState();
 }
 
-class _ReviewsAndroidState extends State<ReviewsAndroid>
-    with AutomaticKeepAliveClientMixin<ReviewsAndroid> {
+class _ReviewsScreenState extends State<ReviewsScreen>
+    with AutomaticKeepAliveClientMixin<ReviewsScreen> {
   bool _isLoading = true;
   List<Review> _reviews = [];
 
@@ -19,7 +24,7 @@ class _ReviewsAndroidState extends State<ReviewsAndroid>
     if (_reviews.isEmpty) {
       _showLoading(true);
       Provider.of<ReviewsProvider>(context, listen: false)
-          .getAndroidReviews()
+          .getReviews(widget.plataform)
           .then((value) {
         _reviews = value;
         _showLoading(false);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './reviews_android.dart';
-import './reviews_ios.dart';
+import 'package:poc_review_store/model/review_type.dart';
+import 'reviews_screen.dart';
 
 class HomeTabs extends StatefulWidget {
   @override
@@ -37,11 +37,11 @@ class _HomeTabsState extends State<HomeTabs> {
           children: [
             Container(
               key: ValueKey(_ANDROID_TAB),
-              child: ReviewsAndroid(),
+              child: ReviewsScreen(ReviewPlataform.android),
             ),
             Container(
               key: ValueKey(_IOS_TAB),
-              child: ReviewsIos(),
+              child: ReviewsScreen(ReviewPlataform.ios),
             ),
           ],
         ),

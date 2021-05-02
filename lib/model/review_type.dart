@@ -1,0 +1,4 @@
+enum ReviewPlataform {
+  ios,
+  android,
+}
