@@ -18,7 +18,7 @@ class ReviewsProvider with ChangeNotifier {
   Future<List<Review>> _getAndroidReviews() {
     return http.get(Uri.parse(_BASE_URL + "reviews/android")).then(
       (value) {
-        List<dynamic> list = jsonDecode(value.body);
+        List<dynamic> list = jsonDecode(value.body)["reviews"];
         List<Review> response = [];
         list.forEach((element) {
           response.add(Review(
@@ -34,7 +34,7 @@ class ReviewsProvider with ChangeNotifier {
   Future<List<Review>> _getIosReviews() {
     return http.get(Uri.parse(_BASE_URL + "reviews/ios")).then(
       (value) {
-        List<dynamic> list = jsonDecode(value.body);
+        List<dynamic> list = jsonDecode(value.body)["reviews"];
         List<Review> response = [];
         list.forEach((element) {
           response.add(Review(element["userName"], element["review"], ""));
