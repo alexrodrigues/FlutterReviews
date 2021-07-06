@@ -1,10 +1,10 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:alert/alert.dart';
 import 'package:poc_review_store/model/review.dart';
 import 'package:poc_review_store/model/review_type.dart';
 import 'package:poc_review_store/providers/reviews_provider.dart';
 import 'package:poc_review_store/widget/review_list.dart';
+import 'package:poc_review_store/widget/review_pie_graph.dart';
 import 'package:provider/provider.dart';
 
 class ReviewsScreen extends StatefulWidget {
@@ -57,7 +57,20 @@ class _ReviewsScreenState extends State<ReviewsScreen>
               child: CircularProgressIndicator(),
             ),
           )
-        : ReviewList(_reviews);
+        : Container(
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 150.0,
+                  child: PieChartReview(),
+                ),
+                Expanded(
+                  child: ReviewList(_reviews),
+                ),
+              ],
+            ),
+          );
   }
 
   @override
