@@ -11,32 +11,42 @@ class ReviewItem extends StatelessWidget {
     return Container(
       child: _review.imageUrl.isNotEmpty
           ? Card(
-              child: ListTile(
-                leading: CircleAvatar(
-                  child: Image.network(
-                    _review.imageUrl,
-                    fit: BoxFit.cover,
+              child: Container(
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+                child: ListTile(
+                  leading: Container(
+                    width: 50,
+                    height: 50,
+                    child: CircleAvatar(
+                      child: Image.network(
+                        _review.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
-                ),
-                title: Text(
-                  _review.name,
-                  style: TextStyle(fontSize: 13.0),
-                ),
-                subtitle: Text(
-                  _review.content,
-                  style: TextStyle(fontSize: 11.0, color: Colors.grey),
+                  title: Text(
+                    _review.name,
+                    style: TextStyle(fontSize: 13.0),
+                  ),
+                  subtitle: Text(
+                    _review.content,
+                    style: TextStyle(fontSize: 11.0, color: Colors.grey),
+                  ),
                 ),
               ),
             )
           : Card(
-              child: ListTile(
-                title: Text(
-                  _review.name,
-                  style: TextStyle(fontSize: 13.0),
-                ),
-                subtitle: Text(
-                  _review.content,
-                  style: TextStyle(fontSize: 11.0, color: Colors.grey),
+              child: Container(
+                padding: EdgeInsets.only(top: 2, bottom: 8),
+                child: ListTile(
+                  title: Text(
+                    _review.name,
+                    style: TextStyle(fontSize: 13.0),
+                  ),
+                  subtitle: Text(
+                    _review.content,
+                    style: TextStyle(fontSize: 11.0, color: Colors.grey),
+                  ),
                 ),
               ),
             ),
