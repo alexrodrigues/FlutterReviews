@@ -14,27 +14,47 @@ class _PieChartReviewState extends State<PieChartReview> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black87,
-      child: PieChart(
-        PieChartData(
-          pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
-            setState(() {
-              final desiredTouch =
-                  pieTouchResponse.touchInput is! PointerExitEvent &&
-                      pieTouchResponse.touchInput is! PointerUpEvent;
-              if (desiredTouch && pieTouchResponse.touchedSection != null) {
-                _touchedIndex =
-                    pieTouchResponse.touchedSection.touchedSectionIndex;
-              } else {
-                _touchedIndex = -1;
-              }
-            });
-          }),
-          startDegreeOffset: 180,
-          borderData: FlBorderData(show: false),
-          sectionsSpace: 1,
-          centerSpaceRadius: 10,
-          sections: showingSections(),
-        ),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Text(
+              "Número de Estrelas",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8),
+              child: PieChart(
+                PieChartData(
+                  pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
+                    setState(() {
+                      final desiredTouch =
+                          pieTouchResponse.touchInput is! PointerExitEvent &&
+                              pieTouchResponse.touchInput is! PointerUpEvent;
+                      if (desiredTouch &&
+                          pieTouchResponse.touchedSection != null) {
+                        _touchedIndex =
+                            pieTouchResponse.touchedSection.touchedSectionIndex;
+                      } else {
+                        _touchedIndex = -1;
+                      }
+                    });
+                  }),
+                  startDegreeOffset: 180,
+                  borderData: FlBorderData(show: false),
+                  sectionsSpace: 1,
+                  centerSpaceRadius: 10,
+                  sections: showingSections(),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -52,10 +72,6 @@ class _PieChartReviewState extends State<PieChartReview> {
               value: 25,
               title: '1',
               radius: 45,
-              // titleStyle: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: const Color(0xff044d7c)),
               titlePositionPercentageOffset: 0.55,
             );
           case 1:
@@ -64,10 +80,6 @@ class _PieChartReviewState extends State<PieChartReview> {
               value: 25,
               title: '2',
               radius: 45,
-              // titleStyle: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: const Color(0xff90672d)),
               titlePositionPercentageOffset: 0.55,
             );
           case 2:
@@ -76,10 +88,6 @@ class _PieChartReviewState extends State<PieChartReview> {
               value: 25,
               title: '3',
               radius: 45,
-              // titleStyle: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: const Color(0xff4c3788)),
               titlePositionPercentageOffset: 0.6,
             );
           case 3:
@@ -88,10 +96,6 @@ class _PieChartReviewState extends State<PieChartReview> {
               value: 25,
               title: '4',
               radius: 45,
-              // titleStyle: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: const Color(0xff0c7f55)),
               titlePositionPercentageOffset: 0.55,
             );
           case 4:
@@ -100,10 +104,6 @@ class _PieChartReviewState extends State<PieChartReview> {
               value: 25,
               title: '5',
               radius: 45,
-              // titleStyle: TextStyle(
-              //     fontSize: 18,
-              //     fontWeight: FontWeight.bold,
-              //     color: const Color(0xff0c7f55)),
               titlePositionPercentageOffset: 0.55,
             );
           default:

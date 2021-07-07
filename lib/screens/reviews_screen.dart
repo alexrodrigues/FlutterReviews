@@ -62,7 +62,7 @@ class _ReviewsScreenState extends State<ReviewsScreen>
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 150.0,
+                  height: 170.0,
                   child: PieChartReview(),
                 ),
                 Expanded(
